@@ -6,17 +6,14 @@ body {
 
 .Stopwatch {
   margin: auto;
-  border: solid 4px black;
+  border: solid 4px back;
   text-align: center;
   height: 250px;
   width: 600px;
 }
-.screen {
+#screen {
   font-size: 20px;
   height: 40px;
-}
-.time {
-  display: inline;
 }
 
 h1,
