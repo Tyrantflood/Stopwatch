@@ -1,30 +1,34 @@
-var hours = 0;
-var minutes = 0;
-var seconds = 0;
-var buttonStart = document.getElementsByClassName("Start");
-var buttonStop = document.getElementsByClassName("Stop");
-var buttonReset = document.getElementsByClassName("Reset");
-var display = document.getElementsByClassName("screen");
-var interval;
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+let buttonStart = document.getElementsById("Start");
+let buttonStop = document.getElementsById("Stop");
+let buttonReset = document.getElementsById("Reset");
+let display = document.getElementsById("screen");
+let interval;
 
 function startTimer() {
   seconds++;
 
   if (seconds == 60) {
-    minutes++;
     seconds = 0;
+    minutes++;
+
+    if (minutes == 60) {
+      minutes = 0;
+      hours++;
+    }
+    if (hours == 24) {
+      hours = 0;
+    }
   }
 
-  if (minutes == 60) {
-    hours++;
-    minutes = 0;
-  }
-  if (hours == 24) {
-    hours = 0;
-  }
+  let h = hours < 10 ? "0" + hours : hours;
+  let m = minutes < 10 ? "0" + minutes : minutes;
+  let s = seconds < 10 ? "0" + seconds : seconds;
+
+  display.innerHTML = h + ":" + m + ":" + s;
 }
-
-display.innerHTML = hours + ":" + minutes + ":" + seconds;
 
 buttonStart.onclick = function watchStart() {
   interval = setInterval(startTimer, 1000);
@@ -34,10 +38,8 @@ buttonStop.onclick = function watchStop() {
   clearInterval(interval);
 };
 buttonReset.onclick = function watchReset() {
-  hours = "00";
-  minutes = "00";
-  seconds = "00";
-  appendHours.innerHTML = hours;
-  appendMinutes.innerHTML = minutes;
-  appendSeconds.innerHTML = seconds;
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  display.innerHTML = "00:00:00";
 };
