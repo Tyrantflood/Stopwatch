@@ -1,57 +1,43 @@
 var hours = 0;
 var minutes = 0;
 var seconds = 0;
-var appendHours = document.getElementById("hours");
-var appendMinutes = document.getElementById("minutes");
-var appendSeconds = document.getElementById("seconds");
 var buttonStart = document.getElementsByClassName("Start");
 var buttonStop = document.getElementsByClassName("Stop");
 var buttonReset = document.getElementsByClassName("Reset");
+var display = document.getElementsByClassName("screen");
 var interval;
 
-(startTimer) => {
+function startTimer() {
   seconds++;
 
-  if (seconds < 9) {
-    appendSeconds.innerHTML = "0" + seconds;
-  }
-
-  if (seconds > 9) {
-    appendSeconds.innerHTML = seconds;
-  }
-
-  if (seconds > 59) {
+  if (seconds == 60) {
     minutes++;
-    appendMinutes.innerHTML = "0" + minutes;
     seconds = 0;
-    appendSeconds.innerHTML = "0" + 0;
-  }
-  if (minutes > 9) {
-    appendMinutes.innerHTML = minutes;
   }
 
-  if (minutes > 59) {
+  if (minutes == 60) {
     hours++;
-    appendHours.innerHtml = "0" + hours;
     minutes = 0;
-    appendMinutes.innerHTML = "0" + 0;
   }
-  if (hours > 9) {
-    appendHours.innerHTML = hours;
+  if (hours == 24) {
+    hours = 0;
   }
-  buttonStart.onclick = function () {
-    interval = setInterval(startTimer);
-  };
+}
 
-  buttonStop.onclick = function () {
-    clearInterval(interval);
-  };
-  buttonReset.onclick = function () {
-    hours = "00";
-    minutes = "00";
-    seconds = "00";
-    appendHours.innerHTML = hours;
-    appendMinutes.innerHTML = minutes;
-    appendSeconds.innerHTML = seconds;
-  };
+display.innerHTML = hours + ":" + minutes + ":" + seconds;
+
+buttonStart.onclick = function watchStart() {
+  interval = setInterval(startTimer, 1000);
+};
+
+buttonStop.onclick = function watchStop() {
+  clearInterval(interval);
+};
+buttonReset.onclick = function watchReset() {
+  hours = "00";
+  minutes = "00";
+  seconds = "00";
+  appendHours.innerHTML = hours;
+  appendMinutes.innerHTML = minutes;
+  appendSeconds.innerHTML = seconds;
 };
