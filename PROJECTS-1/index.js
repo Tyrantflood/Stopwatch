@@ -1,10 +1,10 @@
 let hours = 0;
 let minutes = 0;
 let seconds = 0;
-let buttonStart = document.getElementsById("Start");
-let buttonStop = document.getElementsById("Stop");
-let buttonReset = document.getElementsById("Reset");
-let display = document.getElementsById("screen");
+let buttonStart = document.getElementById("Start");
+let buttonStop = document.getElementById("Stop");
+let buttonReset = document.getElementById("Reset");
+let display = document.getElementById("screen");
 let interval;
 
 function startTimer() {
@@ -17,9 +17,10 @@ function startTimer() {
     if (minutes == 60) {
       minutes = 0;
       hours++;
-    }
-    if (hours == 24) {
-      hours = 0;
+
+      if (hours == 24) {
+        hours = 0;
+      }
     }
   }
 
@@ -30,14 +31,15 @@ function startTimer() {
   display.innerHTML = h + ":" + m + ":" + s;
 }
 
-buttonStart.onclick = function watchStart() {
+buttonStart.onclick = function () {
   interval = setInterval(startTimer, 1000);
 };
 
-buttonStop.onclick = function watchStop() {
+buttonStop.onclick = function () {
   clearInterval(interval);
 };
-buttonReset.onclick = function watchReset() {
+
+buttonReset.onclick = function () {
   hours = 0;
   minutes = 0;
   seconds = 0;
